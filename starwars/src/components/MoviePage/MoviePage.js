@@ -2,11 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Route, NavLink } from 'react-router-dom';
 
-import PeoplePage from '../PeoplePage/PeoplePage';
-import SpeciesPage from '../SpeciesPage/SpeciesPage';
-import PlanetsPage from '../PlanetsPage/PlanetsPage';
-import VehiclesPage from '../VehiclesPage/VehiclesPage';
-import StarshipsPage from '../StarshipsPage/StarshipsPage';
+import DetailPage from './DetailPage';
 
 const PageWrapper = styled.div`
   max-width: 900px;
@@ -47,22 +43,21 @@ const MoviePage = props => {
           <NavLink className="navlink" key={link} to={`/movies/${id}/${link}`}>{link}</NavLink>
         ))}
       </div>
-      <Route exact path={`/movies/${id}/characters`} render={props => (
-        <PeoplePage {...props} characters={movie.characters} />
-      )}/>
-      <Route exact path={`/movies/${id}/species`} render={props => (
-        <SpeciesPage {...props} species={movie.species} />
-      )}/>
-      <Route exact path={`/movies/${id}/planets`} render={props => (
-        <PlanetsPage {...props} planets={movie.planets} />
-      )}/>
-      <Route exact path={`/movies/${id}/vehicles`} render={props => (
-        <VehiclesPage {...props} vehicles={movie.vehicles} />
-      )}/>
-      <Route exact path={`/movies/${id}/starships`} render={props => (
-        <StarshipsPage {...props} starships={movie.starships} />
-      )}/>
-
+      {
+        links.map(link => {
+          return <Route
+            exact path={`/movies/${id}/${link}`}
+            key={id + link}
+            render={props => {
+              return <DetailPage
+                {...props}
+                urls={movie[link]}
+                type={link}
+              />
+            }}
+          />
+      })
+      }
     </PageWrapper>
   );
 }

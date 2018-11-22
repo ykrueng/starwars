@@ -18,7 +18,7 @@ const Home = props => {
     <MovieWrapper className="movies">
       {
         props.movies.map(movie => (
-          <Link to={`/movies/${movie.episode_id}`}>
+          <Link key={movie.episode_id} to={`/movies/${movie.episode_id}`}>
             <MovieCard key={movie.episode_id} movie={movie}/>
           </Link>
         ))
