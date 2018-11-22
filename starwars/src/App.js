@@ -44,17 +44,19 @@ class App extends Component {
     const {movies} = this.state;
     return (
       <div className="App">
-        <NavLink className="navlink" key={'home'} to="/">Home</NavLink>
-        {
-          movies.map(movie => (
-            <NavLink className="navlink" key={movie.episode_id} to={`/movies/${movie.episode_id}`}>{movie.title}</NavLink>
-          ))
-        }
         <Route exact path="/" render={props => (
           <Home {...props} movies={movies} />
         )} />
         <Route path="/movies/:id" render={props => (
-          <MoviePage {...props} movies={movies} />
+          <div>
+            <NavLink className="navlink" key={'home'} to="/">Home</NavLink>
+            {
+              movies.map(movie => (
+                <NavLink className="navlink" key={movie.episode_id} to={`/movies/${movie.episode_id}`}>{movie.title}</NavLink>
+              ))
+            }
+            <MoviePage {...props} movies={movies} />
+          </div>
         )}/>
       </div>
     );
