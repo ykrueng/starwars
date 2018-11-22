@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import MovieCard from './MovieCard';
 
@@ -17,7 +18,9 @@ const Home = props => {
     <MovieWrapper className="movies">
       {
         props.movies.map(movie => (
-          <MovieCard key={movie.episode_id} movie={movie}/>
+          <Link to={`/movies/${movie.episode_id}`}>
+            <MovieCard key={movie.episode_id} movie={movie}/>
+          </Link>
         ))
       }
     </MovieWrapper>
