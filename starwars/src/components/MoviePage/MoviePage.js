@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, NavLink } from 'react-router-dom';
+import moment from 'moment';
 
 import DetailPage from './DetailPage';
 
@@ -29,7 +30,7 @@ const MoviePage = props => {
     <PageWrapper>
       <div>
         <h4>{movie.title.toUpperCase()}</h4>
-        <p>{movie.release_date}</p>
+        <p>{moment(movie.release_date).format('MMM Do, YYYY')}</p>
         <p>Episode:</p>
         <p>{movie.episode_id}</p>
         <p>{movie.opening_crawl}</p>
